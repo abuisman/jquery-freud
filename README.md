@@ -1,6 +1,10 @@
 # jquery-freud
 
+![sigmund](https://cloud.githubusercontent.com/assets/27729/9395534/56b81cd0-478f-11e5-9543-7d0afaa5a855.jpg)
+
 Add behaviours to DOM elements, somewhat like components. These are simple Javascript classes that can do whatever you want with the element. Much simpler than building a jQuery plugin and less messy than one big js file.
+
+![freudsignature](https://cloud.githubusercontent.com/assets/27729/9395535/56b9558c-478f-11e5-8994-788cbffadfe5.png)
 
 ## What is a behaviour?
 
