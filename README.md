@@ -1,0 +1,118 @@
+# jquery-freud
+
+Add behaviours to DOM elements, somewhat like components. These are simple Javascript classes that can do whatever you want with the element. Much simpler than building a jQuery plugin and less messy than one big js file.
+
+## What is a behaviour?
+
+A behaviour is a simple class with a constructor that gets passed the element they are applied to. That class can then do all sorts of magical and not so magical things with that element.
+
+## An example
+
+````
+class IncreaseCount
+  constructor: (@element) ->
+    @count = @element.data(‘count’) || 0
+		$button = $(‘<button>Add one</button>’)
+		@element.append($button)
+		$button.on(‘click’, @handleButtonClick)
+
+  buttonClick: =>
+    @count = @count + 1;
+    @element.find(‘.count’).text(@count)
+````
+
+For brevity the above code is in Coffeescript, but you can use any class you want. Freud creates an instance like this: `new behaviour(element)`.
+
+You can now tell Freud about the behaviour like so:
+
+`$.freud(‘register’, IncreaseCount)`
+
+Freud now knows this behaviour as ‘IncreaseCount’. If you want to use a different name you can do:
+
+`$.freud(‘register’, ‘OtherName’, IncreaseCount)`
+
+
+## Applying behaviours
+
+Behaviours are applied to an element by setting a `data` attribute called `behaviours` on them with the name of the behaviour(s) as the value:
+
+````
+ -- HTML:
+  <div class='greeting-card' data-behaviours='greetingCard'></div>
+
+ -- Javascript
+  $(function() {
+    $('[data-behaviours]').freud();
+  });
+````
+### Other key
+
+You can also use your own key in case you don't want to use `'behaviours'`:
+
+````
+ -- HTML:
+  <div class='greeting-card' data-custom-key='greetingCard'></div>
+
+ -- Javascript
+  $(function() {
+    $('[data-behaviours]').freud({ behaviourKey: 'custom-key'});
+  });
+````
+
+### More than one behaviour
+
+Apply more than one behaviour to the same element by passing a JSON array as the behaviours value:
+
+````
+  <div class='greeting-card' data-behaviours='["GreetingCard", "HelloWorld"]'></div>
+````
+
+### Example uses
+
+Some things that I have used behaviours for:
+
+- In a calculations app we have charts displaying the results of calculations. My behaviour sits on the chart’s container and opens up the web socket connection to listen for changes to the chart. When there is a change I refresh the chart with `@element.load(@element.data(‘chartUrl’))`
+
+- In forms you sometimes have select boxes that manage the values of other select boxes. E.g. ‘select country’, ‘select city’. When you select a country the list of cities changes to display the cities for that country, etc. Instead of binding directly to the first select box, you can manage the code more easily in a behaviour that you put on the whole form. If you use the same pattern more often for different forms you can even apply multiple behaviours:
+
+`<form behaviours=‘[“CountrySelect”, ”GoogleMaps”]’>`
+
+## Feedback
+
+If you find any bugs or issues please create a ticket here (on github). If you have any questions feel free to e-mail me at the e-mail address contained in the `package.json` and `bower.json`.
+
+## Contributing
+
+With regards to bugs and issues, or when you find a killer feature for Freud please consider contributing.
+
+### Grunt
+
+Freud is written in Coffeescript. You can edit the file in `src` and build it by running the command `grunt`. This will also start a simple static file server where you can play around with the plugin on a simple index.html.
+
+Also make sure that all tests are passing by running `grunt test`.
+
+## License
+
+--------------
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Achilleas L.D. Buisman
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

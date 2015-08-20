@@ -1,11 +1,11 @@
 {
-  "name": "jQuery-Freud",
+  "name": "jquery-freud",
   "version": "1.0.0",
   "authors": [
     "Achilleas Buisman <jquery-freud@abuisman.nl>"
   ],
   "description": "Add behaviours to DOM elements, somewhat like components. These are simple Javascript classes that can do whatever you want with the element. Much simpler than building a jQuery plugin and less messy than one big js file.",
-  "main": "jquery-freud.min.js",
+  "main": "dist/jquery-freud.min.js",
   "keywords": [
     "components",
     "elements",
@@ -13,7 +13,7 @@
     "behaviour"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/abuisman/jquery-freud",
+  "homepage": "https://github.com/abuisman/jquery-freud",
   "ignore": [
     "**/.*",
     "node_modules",

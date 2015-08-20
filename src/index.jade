@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    script(src='jquery-2.1.4.min.js')
+    script(src='jquery-freud.js')
+    script(src='tests.js')
+
+    script(type='text/javascript').
+      $(document).ready(function(){
+        console.log('hoi')
+        $('[data-behaviours]').freud();
+      })
+
+  body
+    h1 jQuery Freud
+
+    p This page is used during development to have something to test with.
+
+    h2 What is Freud?
+
+    p Freud makes it very easy to create contained behaviours for specific DOM elements. Turn your DOM elements into component-like elements.
+
+    p For more information, see the README.md and github repo.
+
+    p(data-behaviours='["Test1", "Test2"]') Sigmund
+
+    p(data-behaviours='["Test1", "Test2"]') Freud

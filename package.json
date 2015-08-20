@@ -1,0 +1,32 @@
+{
+  "name": "jquery-freud",
+  "version": "1.0.0",
+  "description": "Add behaviours to DOM elements, somewhat like components. These are simple Javascript classes that can do whatever you want with the element. Much simpler than building a jQuery plugin and less messy than one big js file.",
+  "homepage": "http://github.com/abuisman/jquery-freud",
+  "author": [
+    "Achilleas Buisman <jquery-freud@abuisman.nl>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abuisman/jquery-freud.git"
+  },
+  "main": "dist/jquery-freud.min.js",
+  "keywords": [
+    "components",
+    "elements",
+    "contained",
+    "behaviour"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jade": "^0.15.0",
+    "grunt-contrib-jasmine": "^0.9.1",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
