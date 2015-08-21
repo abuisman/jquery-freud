@@ -70,6 +70,18 @@ describe("Applying behaviours to elements", function(){
     expect($other_key.data('loaded_bahaviour_TestBehaviour2')).toBe(true);
     expect($other_key.data('loaded_bahaviour_TestBehaviour3')).not.toBeDefined();
   });
+
+  it('Applies behaviour that was declared as it was given to freud', function(){
+    expect($inline_delcared.text()).toEqual('Transmitted!');
+    expect($inline_delcared.data('loaded_bahaviour_PassedInline')).toBeDefined();
+  });
+
+  it('Applies options passed to freud when instantiating and data-attributes', function(){
+    expect($options_passed.data('loaded_bahaviour_OptionsPasser')).toBeDefined();
+    expect($options_passed.data()).toEqual(jasmine.objectContaining({ should: "Be in options" }));
+    expect($options_passed.data()).toEqual(jasmine.objectContaining({ behaviourKey: "option-check" }));
+    expect($options_passed.data()).toEqual(jasmine.objectContaining({ test: "option" }));
+  });
 });
 
 /**
@@ -119,10 +131,34 @@ TestBehaviour4 = (function() {
   return TestBehaviour4;
 })();
 
+OptionsPasser = (function() {
+  function OptionsPasser(element, options) {
+    this.element = element;
+    this.element.data('optionsPassed', options);
+  }
+
+  return OptionsPasser;
+})();
+
 $.freud('register', 'TestBehaviour', TestBehaviour);
 $.freud('register', 'TestBehaviour2', TestBehaviour2);
 $.freud('register', TestBehaviour3);
 $.freud('register', 'James', TestBehaviour4);
+$.freud('register', OptionsPasser);
+
+$.freud('register', PassedInline = (function() {
+  var PassedInline;
+
+  function PassedInline(element, options) {
+    this.element = element;
+    if (options == null) {
+      options = {};
+    }
+    this.element.text('Transmitted!')
+  }
+
+  return PassedInline;
+})());
 
 $one_behaviour = $('<div id="first_element" data-behaviours="TestBehaviour">Not applied</div>');
 $('body').append($one_behaviour);
@@ -136,9 +172,15 @@ $('body').append($third_behaviour_only);
 $different_name = $('<div id="different_name" data-behaviours=\'["James"]\'>Ian Fleming</div>')
 $('body').append($different_name);
 
-
 $other_key = $('<div id="other_key" data-custom-key=\'["TestBehaviour", "TestBehaviour2"]\'>Skeleton key</div>')
 $('body').append($other_key);
 
+$inline_delcared = $('<div id="inline_delcared" data-behaviours=\'["PassedInline"]\'>Neuro</div>')
+$('body').append($inline_delcared);
+
+$options_passed = $('<div id="options_passed" data-option-check=\'["OptionsPasser"]\' data-should="Be in options">Alt</div>')
+$('body').append($options_passed);
+
 $('[data-behaviours]').freud()
 $('[data-custom-key]').freud({ behaviourKey: 'custom-key' })
+$('[data-option-check]').freud({ behaviourKey: 'option-check', test:'option' })

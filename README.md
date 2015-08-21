@@ -18,7 +18,7 @@ A behaviour is a simple class with a constructor that gets passed the element th
 
 ````
 class IncreaseCount
-  constructor: (@element) ->
+  constructor: (@element, options = {}) ->
     @count = @element.data(‘count’) || 0
 		$button = $(‘<button>Add one</button>’)
 		@element.append($button)
@@ -39,6 +39,15 @@ Freud now knows this behaviour as ‘IncreaseCount’. If you want to use a diff
 
 `$.freud(‘register’, ‘OtherName’, IncreaseCount)`
 
+Of course you can also directly declare the behaviour as you pass it to freud:
+
+````
+$.freud('register',
+  class OttoLoewi
+    constructor: (@element, options = {}) ->
+      neurotransmit(@element)
+)
+````
 
 ## Applying behaviours
 
