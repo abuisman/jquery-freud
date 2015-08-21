@@ -1,5 +1,9 @@
 # jquery-freud
 
+Master: [![Build Status](https://travis-ci.org/abuisman/jquery-freud.svg?branch=master)](https://travis-ci.org/abuisman/jquery-freud)
+
+Version 1.0.0: [![Build Status](https://travis-ci.org/abuisman/jquery-freud.svg?branch=1.0.0)](https://travis-ci.org/abuisman/jquery-freud)
+
 ![sigmund](https://cloud.githubusercontent.com/assets/27729/9395534/56b81cd0-478f-11e5-9543-7d0afaa5a855.jpg)
 
 Add behaviours to DOM elements, somewhat like components. These are simple Javascript classes that can do whatever you want with the element. Much simpler than building a jQuery plugin and less messy than one big js file.
