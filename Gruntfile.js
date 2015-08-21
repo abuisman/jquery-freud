@@ -43,7 +43,7 @@ module.exports = function(grunt) {
           mangle: false
         },
         files: {
-          'dist/jquery-freud.min.js': [ 'dist/**/*.js' ]
+          'dist/jquery-freud.min.js': [ 'dist/jquery-freud.js' ]
         }
       }
     },
