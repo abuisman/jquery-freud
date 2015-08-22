@@ -39,45 +39,45 @@ describe("Applying behaviours to elements", function(){
   it('First element only has the first behaviour applied', function(){
     expect($one_behaviour.text()).toEqual('TestBehaviour was applied');
     expect($one_behaviour.attr('applied')).not.toBeDefined();
-    expect($one_behaviour.data('loaded_bahaviour_TestBehaviour')).toBe(true);
-    expect($one_behaviour.data('loaded_bahaviour_TestBehaviour2')).not.toBeDefined();
-    expect($one_behaviour.data('loaded_bahaviour_TestBehaviour3')).not.toBeDefined();
+    expect($one_behaviour.data('loaded_behaviour_TestBehaviour')).toBe(true);
+    expect($one_behaviour.data('loaded_behaviour_TestBehaviour2')).not.toBeDefined();
+    expect($one_behaviour.data('loaded_behaviour_TestBehaviour3')).not.toBeDefined();
   });
 
   it('Second element only has both behaviours applied', function(){
     expect($two_behaviours.text()).toEqual('TestBehaviour was applied');
     expect($two_behaviours.attr('applied')).toEqual('Sigmund was here');
-    expect($two_behaviours.data('loaded_bahaviour_TestBehaviour')).toBe(true);
-    expect($two_behaviours.data('loaded_bahaviour_TestBehaviour2')).toBe(true);
+    expect($two_behaviours.data('loaded_behaviour_TestBehaviour')).toBe(true);
+    expect($two_behaviours.data('loaded_behaviour_TestBehaviour2')).toBe(true);
   });
 
   it('Third element only has the third behaviour applied', function(){
     expect($third_behaviour_only.text()).toEqual("Third Time's a Charm");
-    expect($third_behaviour_only.data('loaded_bahaviour_TestBehaviour')).not.toBeDefined();
-    expect($third_behaviour_only.data('loaded_bahaviour_TestBehaviour2')).not.toBeDefined();
-    expect($third_behaviour_only.data('loaded_bahaviour_TestBehaviour3')).toBe(true);
+    expect($third_behaviour_only.data('loaded_behaviour_TestBehaviour')).not.toBeDefined();
+    expect($third_behaviour_only.data('loaded_behaviour_TestBehaviour2')).not.toBeDefined();
+    expect($third_behaviour_only.data('loaded_behaviour_TestBehaviour3')).toBe(true);
   });
 
   it('Uses a custom name when given', function(){
     expect($different_name.text()).toEqual("My enemies know me as 'Bond'. 'James Bond'");
-    expect($different_name.data('loaded_bahaviour_James')).toBe(true);
+    expect($different_name.data('loaded_behaviour_James')).toBe(true);
   });
 
   it('Applies behaviours using a custom key', function(){
     expect($other_key.text()).toEqual('TestBehaviour was applied');
     expect($other_key.attr('applied')).toEqual('Sigmund was here');
-    expect($other_key.data('loaded_bahaviour_TestBehaviour')).toBe(true);
-    expect($other_key.data('loaded_bahaviour_TestBehaviour2')).toBe(true);
-    expect($other_key.data('loaded_bahaviour_TestBehaviour3')).not.toBeDefined();
+    expect($other_key.data('loaded_behaviour_TestBehaviour')).toBe(true);
+    expect($other_key.data('loaded_behaviour_TestBehaviour2')).toBe(true);
+    expect($other_key.data('loaded_behaviour_TestBehaviour3')).not.toBeDefined();
   });
 
   it('Applies behaviour that was declared as it was given to freud', function(){
     expect($inline_delcared.text()).toEqual('Transmitted!');
-    expect($inline_delcared.data('loaded_bahaviour_PassedInline')).toBeDefined();
+    expect($inline_delcared.data('loaded_behaviour_PassedInline')).toBeDefined();
   });
 
   it('Applies options passed to freud when instantiating and data-attributes', function(){
-    expect($options_passed.data('loaded_bahaviour_OptionsPasser')).toBeDefined();
+    expect($options_passed.data('loaded_behaviour_OptionsPasser')).toBeDefined();
     expect($options_passed.data()).toEqual(jasmine.objectContaining({ should: "Be in options" }));
     expect($options_passed.data()).toEqual(jasmine.objectContaining({ behaviourKey: "option-check" }));
     expect($options_passed.data()).toEqual(jasmine.objectContaining({ test: "option" }));

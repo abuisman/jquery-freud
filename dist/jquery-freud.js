@@ -52,8 +52,8 @@
             results = [];
             for (i = 0, len = el_behaviours.length; i < len; i++) {
               behaviour_name = el_behaviours[i];
-              if (!$el.data("loaded_bahaviour_" + behaviour_name)) {
-                $el.data("loaded_bahaviour_" + behaviour_name, true);
+              if (!$el.data("loaded_behaviour_" + behaviour_name)) {
+                $el.data("loaded_behaviour_" + behaviour_name, true);
                 $el.data($.extend({}, options, $el.data()));
                 if (freud_behaviours[behaviour_name]) {
                   results.push(new freud_behaviours[behaviour_name]($el, options));

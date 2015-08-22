@@ -47,8 +47,8 @@
 
           for behaviour_name in el_behaviours
             # Prevent double binding of behaviour
-            unless $el.data("loaded_bahaviour_#{behaviour_name}")
-              $el.data("loaded_bahaviour_#{behaviour_name}", true);
+            unless $el.data("loaded_behaviour_#{behaviour_name}")
+              $el.data("loaded_behaviour_#{behaviour_name}", true);
               $el.data $.extend({}, options, $el.data())
               new freud_behaviours[behaviour_name]($el, options) if freud_behaviours[behaviour_name]
 
