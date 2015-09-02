@@ -1,12 +1,30 @@
 (function() {
   (function($) {
-    var default_options, fn_methods, freud_behaviours, top_methods;
+    var default_options, fn_methods, freud_behaviours, top_methods, utils;
     default_options = {
       behaviourKey: 'behaviours'
     };
     if (!freud_behaviours) {
       freud_behaviours = {};
     }
+    utils = {
+      normalize_behaviours: function(behaviours) {
+        var e;
+        if (!behaviours) {
+          return [];
+        }
+        try {
+          behaviours = JSON.parse(behaviours);
+        } catch (_error) {
+          e = _error;
+          behaviours = behaviours;
+        }
+        if (typeof behaviours !== 'object') {
+          behaviours = [behaviours];
+        }
+        return behaviours;
+      }
+    };
     top_methods = {
       register: function(behaviour_or_name, behaviour) {
         var name;
@@ -32,40 +50,38 @@
     };
     fn_methods = {
       init: function(options) {
-        var behaviourKey;
-        options = $.extend({}, default_options, options);
+        var behaviourKey, given_behaviours;
+        if (options && (options.constructor === Array)) {
+          given_behaviours = options;
+          options = $.extend({}, default_options);
+        } else {
+          options = $.extend({}, default_options, options);
+        }
         behaviourKey = options.behaviourKey;
         return this.each(function(index, el) {
-          var $el, behaviour_name, e, el_behaviours, i, len, results;
+          var $el, behaviour_name, el_behaviours, i, len, results;
           $el = $(el);
-          if ($el.data(behaviourKey)) {
-            el_behaviours = $el.data(behaviourKey);
-            try {
-              el_behaviours = JSON.parse(el_behaviours);
-            } catch (_error) {
-              e = _error;
-              el_behaviours = el_behaviours;
-            }
-            if (typeof el_behaviours !== 'object') {
-              el_behaviours = [el_behaviours];
-            }
-            results = [];
-            for (i = 0, len = el_behaviours.length; i < len; i++) {
-              behaviour_name = el_behaviours[i];
-              if (!$el.data("loaded_behaviour_" + behaviour_name)) {
-                $el.data("loaded_behaviour_" + behaviour_name, true);
-                $el.data($.extend({}, options, $el.data()));
-                if (freud_behaviours[behaviour_name]) {
-                  results.push(new freud_behaviours[behaviour_name]($el, options));
-                } else {
-                  results.push(void 0);
-                }
+          el_behaviours = [];
+          el_behaviours = utils.normalize_behaviours($el.data(behaviourKey));
+          if (given_behaviours) {
+            el_behaviours = el_behaviours.concat(given_behaviours);
+          }
+          results = [];
+          for (i = 0, len = el_behaviours.length; i < len; i++) {
+            behaviour_name = el_behaviours[i];
+            if (!$el.data("loaded_behaviour_" + behaviour_name)) {
+              $el.data("loaded_behaviour_" + behaviour_name, true);
+              $el.data($.extend({}, options, $el.data()));
+              if (freud_behaviours[behaviour_name]) {
+                results.push(new freud_behaviours[behaviour_name]($el, options));
               } else {
                 results.push(void 0);
               }
+            } else {
+              results.push(void 0);
             }
-            return results;
           }
+          return results;
         });
       }
     };

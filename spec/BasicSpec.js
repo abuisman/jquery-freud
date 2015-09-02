@@ -82,6 +82,20 @@ describe("Applying behaviours to elements", function(){
     expect($options_passed.data()).toEqual(jasmine.objectContaining({ behaviourKey: "option-check" }));
     expect($options_passed.data()).toEqual(jasmine.objectContaining({ test: "option" }));
   });
+
+  it('Applies behaviours passed to freud function as an array to matched elements', function(){
+    expect($apply_directly.text()).toEqual('Tenderlove');
+    expect($apply_directly.data('what')).toEqual('rails');
+    expect($apply_directly.data('loaded_behaviour_Tender')).toBe(true);
+    expect($apply_directly.data('loaded_behaviour_Love')).toBe(true);
+  });
+
+  it('Applies both data behaviours as well as array passed behaviours', function(){
+    expect($directly_and_data.text()).toEqual('TestBehaviour was applied');
+    expect($directly_and_data.data('tellme')).toEqual('Your secrets');
+    expect($directly_and_data.data('loaded_behaviour_TheScientist')).toBe(true);
+    expect($directly_and_data.data('loaded_behaviour_TestBehaviour')).toBe(true);
+  });
 });
 
 /**
@@ -131,6 +145,8 @@ TestBehaviour4 = (function() {
   return TestBehaviour4;
 })();
 
+var OptionsPasser;
+
 OptionsPasser = (function() {
   function OptionsPasser(element, options) {
     this.element = element;
@@ -140,11 +156,49 @@ OptionsPasser = (function() {
   return OptionsPasser;
 })();
 
+var Tender;
+
+Tender = (function() {
+  function Tender(element, options) {
+    this.element = element;
+    this.element.text('Tenderlove')
+  }
+
+  return Tender;
+})();
+
+var Love;
+
+Love = (function() {
+  function Love(element) {
+    this.element = element;
+    this.element.data('what', 'rails');
+  }
+
+  return Love;
+})();
+
+var TheScientist;
+
+TheScientist = (function() {
+  function TheScientist(element) {
+    this.element = element;
+    this.element.data('tellme', 'Your secrets');
+  }
+
+  return TheScientist;
+})();
+
 $.freud('register', 'TestBehaviour', TestBehaviour);
 $.freud('register', 'TestBehaviour2', TestBehaviour2);
 $.freud('register', TestBehaviour3);
 $.freud('register', 'James', TestBehaviour4);
 $.freud('register', OptionsPasser);
+
+$.freud('register', Tender);
+$.freud('register', Love);
+$.freud('register', TheScientist);
+
 
 $.freud('register', PassedInline = (function() {
   var PassedInline;
@@ -181,6 +235,14 @@ $('body').append($inline_delcared);
 $options_passed = $('<div id="options_passed" data-option-check=\'["OptionsPasser"]\' data-should="Be in options">Alt</div>')
 $('body').append($options_passed);
 
+$apply_directly = $('<div id="match_me_tender">Match me sweet</div>')
+$('body').append($apply_directly);
+
+$directly_and_data = $('<div id="secrets" data-behaviours="TestBehaviour">Questions of science</div>')
+$('body').append($directly_and_data);
+
 $('[data-behaviours]').freud()
 $('[data-custom-key]').freud({ behaviourKey: 'custom-key' })
 $('[data-option-check]').freud({ behaviourKey: 'option-check', test:'option' })
+$('#match_me_tender').freud(['Tender', 'Love']);
+$('#secrets').freud(['TheScientist'])

@@ -2,7 +2,7 @@
 
 Master: [![Build Status](https://travis-ci.org/abuisman/jquery-freud.svg?branch=master)](https://travis-ci.org/abuisman/jquery-freud)
 
-Version 1.0.2: [![Build Status](https://travis-ci.org/abuisman/jquery-freud.svg?branch=v1.0.2)](https://travis-ci.org/abuisman/jquery-freud)
+Version 1.1.0: [![Build Status](https://travis-ci.org/abuisman/jquery-freud.svg?branch=v1.1.0)](https://travis-ci.org/abuisman/jquery-freud)
 
 ![sigmund](https://cloud.githubusercontent.com/assets/27729/9395534/56b81cd0-478f-11e5-9543-7d0afaa5a855.jpg)
 
@@ -51,7 +51,9 @@ $.freud('register',
 
 ## Applying behaviours
 
-Behaviours are applied to an element by setting a `data` attribute called `behaviours` on them with the name of the behaviour(s) as the value:
+### Data attribute 'behaviours'
+
+Behaviours can be applied to an element by setting a `data` attribute called `behaviours` on them with the name of the behaviour(s) as the value:
 
 ````
  -- HTML:
@@ -62,6 +64,35 @@ Behaviours are applied to an element by setting a `data` attribute called `behav
     $('[data-behaviours]').freud();
   });
 ````
+
+### Passing behaviours to freud()
+
+Alternatively you may pass data-attributes to freud by passing an array to freud when selecting elements:
+
+````
+-- HTML:
+  <div class='greeting-card'></div>
+
+-- Javascript
+  $(function(){
+    $('.greeting-card').freud(['greetingCard']);
+  })
+````
+
+### Hybrid
+
+You can also use both methods at the same time:
+
+````
+-- HTML:
+  <div class='greeting-card' data-behaviours='anotherBehaviour'></div>
+
+-- Javascript
+  $(function(){
+    $('.greeting-card').freud(['greetingCard']);
+  })
+````
+
 ### Other key
 
 You can also use your own key in case you don't want to use `'behaviours'`:
@@ -82,6 +113,18 @@ Apply more than one behaviour to the same element by passing a JSON array as the
 
 ````
   <div class='greeting-card' data-behaviours='["GreetingCard", "HelloWorld"]'></div>
+````
+
+You can also apply many behaviours through passing behaviours through the freud function:
+
+````
+-- HTML:
+  <div class='greeting-card'></div>
+
+-- Javascript
+  $(function(){
+    $('.greeting-card').freud(['greetingCard', 'anotherBehaviour']);
+  })
 ````
 
 ### Example uses
