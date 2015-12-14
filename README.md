@@ -19,25 +19,25 @@ A behaviour is a simple class with a constructor that gets passed the element th
 ````
 class IncreaseCount
   constructor: (@element, options = {}) ->
-    @count = @element.data(‘count’) || 0
-		$button = $(‘<button>Add one</button>’)
-		@element.append($button)
-		$button.on(‘click’, @handleButtonClick)
+    @count = @element.data('count') || 0
+    $button = $('<button>Add one</button>')
+    @element.append($button)
+    $button.on('click', @handleButtonClick)
 
   buttonClick: =>
     @count = @count + 1;
-    @element.find(‘.count’).text(@count)
+    @element.find('.count').text(@count)
 ````
 
 For brevity the above code is in Coffeescript, but you can use any class you want. Freud creates an instance like this: `new behaviour(element)`.
 
 You can now tell Freud about the behaviour like so:
 
-`$.freud(‘register’, IncreaseCount)`
+`$.freud('register', IncreaseCount)`
 
-Freud now knows this behaviour as ‘IncreaseCount’. If you want to use a different name you can do:
+Freud now knows this behaviour as 'IncreaseCount'. If you want to use a different name you can do:
 
-`$.freud(‘register’, ‘OtherName’, IncreaseCount)`
+`$.freud('register', 'OtherName', IncreaseCount)`
 
 Of course you can also directly declare the behaviour as you pass it to freud:
 
@@ -131,11 +131,11 @@ You can also apply many behaviours through passing behaviours through the freud 
 
 Some things that I have used behaviours for:
 
-- In a calculations app we have charts displaying the results of calculations. My behaviour sits on the chart’s container and opens up the web socket connection to listen for changes to the chart. When there is a change I refresh the chart with `@element.load(@element.data(‘chartUrl’))`
+- In a calculations app we have charts displaying the results of calculations. My behaviour sits on the chart's container and opens up the web socket connection to listen for changes to the chart. When there is a change I refresh the chart with `@element.load(@element.data('chartUrl'))`
 
-- In forms you sometimes have select boxes that manage the values of other select boxes. E.g. ‘select country’, ‘select city’. When you select a country the list of cities changes to display the cities for that country, etc. Instead of binding directly to the first select box, you can manage the code more easily in a behaviour that you put on the whole form. If you use the same pattern more often for different forms you can even apply multiple behaviours:
+- In forms you sometimes have select boxes that manage the values of other select boxes. E.g. 'select country', 'select city'. When you select a country the list of cities changes to display the cities for that country, etc. Instead of binding directly to the first select box, you can manage the code more easily in a behaviour that you put on the whole form. If you use the same pattern more often for different forms you can even apply multiple behaviours:
 
-`<form behaviours=‘[“CountrySelect”, ”GoogleMaps”]’>`
+`<form behaviours='[“CountrySelect”, ”GoogleMaps”]'>`
 
 ## Feedback
 
