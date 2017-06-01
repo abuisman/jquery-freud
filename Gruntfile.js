@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       },
       vendor: {
         cwd: 'vendor',
-        src: [ 'jquery-2.1.4.min.js' ],
+        src: [ 'jquery-3.2.1.min.js' ],
         dest: 'dist',
         expand: true
       },
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         src: [ 'dist' ]
       },
       scripts: {
-        src: [ 'dist/**/*.js', '!dist/jquery-freud.js', '!dist/jquery-freud.min.js', '!dist/jquery-2.1.4.min.js', '!dist/tests.js' ]
+        src: [ 'dist/**/*.js', '!dist/jquery-freud.js', '!dist/jquery-freud.min.js', '!dist/jquery-3.2.1.min.js', '!dist/tests.js' ]
       },
     },
 
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
         tasks: [ 'copy:build' ]
       },
       copy_vendor: {
-        files: [ 'vendor/jquery-2.1.4.min.js' ],
+        files: [ 'vendor/jquery-3.2.1.min.js' ],
         tasks: [ 'copy:vendor' ]
       }
     },
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
     jasmine : {
       src : 'dist/jquery-freud.js',
       options : {
-        vendor: ['vendor/jquery-2.1.4.min.js'],
+        vendor: ['vendor/jquery-3.2.1.min.js'],
         specs : 'spec/**/*.js'
       }
     },

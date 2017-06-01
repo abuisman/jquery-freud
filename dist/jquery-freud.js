@@ -9,14 +9,14 @@
     }
     utils = {
       normalize_behaviours: function(behaviours) {
-        var e;
+        var e, error;
         if (!behaviours) {
           return [];
         }
         try {
           behaviours = JSON.parse(behaviours);
-        } catch (_error) {
-          e = _error;
+        } catch (error) {
+          e = error;
           behaviours = behaviours;
         }
         if (typeof behaviours !== 'object') {
