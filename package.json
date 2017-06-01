@@ -1,6 +1,6 @@
 {
   "name": "jquery-freud",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Add behaviours to DOM elements, somewhat like components. These are simple Javascript classes that can do whatever you want with the element. Much simpler than building a jQuery plugin and less messy than one big js file.",
   "homepage": "http://github.com/abuisman/jquery-freud",
   "author": [
